@@ -1,0 +1,17 @@
+{
+    "title": "NDCRaw",
+    "authors": [ "Mike Morano <mmorano@mikeandwan.us>" ],
+    "licenseUrl": "https://github.com/AerisG222/NDCRaw/blob/master/LICENSE.md",
+    "projectUrl": "https://github.com/AerisG222/NDCRaw",
+    "summary": ".Net wrapper for DCRaw",
+    "description": ".Net wrapper for DCRaw",
+    "tags": [ "raw", "DCRaw", "photography", "imaging" ],
+    "version": "0.1.0",
+    "dependencies": {
+
+    },
+    "frameworks": {
+        "net451": { }
+    }
+}
+
