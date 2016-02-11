@@ -18,10 +18,10 @@ namespace NDCRaw
         public string DarkFrameFile { get; set; }
         public float? DarknessLevel { get; set; }
         public float? SaturationLevel { get; set; }
-        public float? WaveletDenoisingThreshold { get; set; }
+        public int? WaveletDenoisingThreshold { get; set; }
         public HighlightMode? HighlightMode { get; set; }
         public FlipImage? Flip { get; set; }
-        public OutputColorspace? Colorspace { get; set; }
+        public Colorspace? Colorspace { get; set; }
         public string OutputIccProfileFile { get; set; }
         public string CameraIccProfileFile { get; set; }
         public bool DocumentMode { get; set; }
@@ -32,16 +32,15 @@ namespace NDCRaw
         public InterpolationQuality? Quality { get; set; }
         public bool HalfSizeColorImage { get; set; }
         public bool InterpolateRggbAsFourColors { get; set; }
-        public float? AppliedMedianFilter { get; set; }
+        public int? AppliedMedianFilterNumberPasses { get; set; }
         public bool Write16Bits { get; set; }
-        public OutputFormat Format { get; set; }
+        public Format Format { get; set; }
 
         
         public DCRawOptions()
         {
             DCRawPath = "dcraw";
-            //ExecutionTimeout = 30000;
-            Format = OutputFormat.Ppm;
+            Format = Format.Ppm;
         }
         
         
@@ -159,7 +158,7 @@ namespace NDCRaw
             
             if(GammaCurve != null)
             {
-                args.AppendFormat("-g {0} {1} ", GammaCurve.P, GammaCurve.Ts);
+                args.AppendFormat("-g {0} {1} ", GammaCurve.Power, GammaCurve.ToeSlope);
             }
             
             if(Quality != null)
@@ -177,9 +176,9 @@ namespace NDCRaw
                 args.Append("-f ");
             }
             
-            if(AppliedMedianFilter != null)
+            if(AppliedMedianFilterNumberPasses != null)
             {
-                args.AppendFormat("-m {0} ", AppliedMedianFilter);
+                args.AppendFormat("-m {0} ", AppliedMedianFilterNumberPasses);
             }
             
             if(Write16Bits)
@@ -187,7 +186,7 @@ namespace NDCRaw
                 args.Append("-6 ");
             }
             
-            if(Format == OutputFormat.Tiff)
+            if(Format == Format.Tiff)
             {
                 args.Append("-T ");
             }

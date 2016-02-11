@@ -2,13 +2,13 @@ namespace NDCRaw
 {
     public class CustomGammaCurve
     {
-        public float P { get; set; }
-        public float Ts { get; set; }
+        public float Power { get; set; }
+        public float ToeSlope { get; set; }
         
-        public CustomGammaCurve(float p, float ts)
+        public CustomGammaCurve(float power, float toeSlope)
         {
-            P = p;
-            Ts = ts;
+            Power = power;
+            ToeSlope = toeSlope;
         }
     }
 }

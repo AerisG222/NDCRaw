@@ -1,6 +1,6 @@
 namespace NDCRaw
 {
-    public enum OutputColorspace
+    public enum Colorspace
     {
         Raw,
         sRGB,

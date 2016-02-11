@@ -5,12 +5,12 @@ namespace NDCRaw
         Clip = 0,
         Unclip = 1,
         Blend = 2,
-        Rebuild1 = 3,
-        Rebuild2 = 4,
-        Rebuild3 = 5,
-        Rebuild4 = 6,
-        Rebuild5 = 7,
-        Rebuild6 = 8,
-        Rebuild7 = 9
+        Rebuild3 = 3,
+        Rebuild4 = 4,
+        Rebuild5 = 5,
+        Rebuild6 = 6,
+        Rebuild7 = 7,
+        Rebuild8 = 8,
+        Rebuild9 = 9
     }
 }

@@ -2,14 +2,14 @@ namespace NDCRaw
 {
     public class ChromaticAbberationCorrection
     {
-        public float R { get; set; }
-        public float B { get; set; }
+        public float RedMagnification { get; set; }
+        public float BlueMagnification { get; set; }
         
         
-        public ChromaticAbberationCorrection(float r, float b)
+        public ChromaticAbberationCorrection(float redMagnification, float blueMagnification)
         {
-            R = r;
-            B = b;
+            RedMagnification = redMagnification;
+            BlueMagnification = blueMagnification;
         }
     }
 }

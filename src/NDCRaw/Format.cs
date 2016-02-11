@@ -1,6 +1,6 @@
 namespace NDCRaw
 {
-    public enum OutputFormat
+    public enum Format
     {
         Ppm,
         Tiff

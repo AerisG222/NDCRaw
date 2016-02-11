@@ -39,7 +39,7 @@ namespace NDCRaw
         Task<string> RunProcessAsync(string fileName)
         {
             var tcs = new TaskCompletionSource<string>();
-            var ext = Options.Format == OutputFormat.Ppm ? ".ppm" : ".tiff";
+            var ext = Options.Format == Format.Ppm ? ".ppm" : ".tiff";
             var output = fileName.Replace(Path.GetExtension(fileName), ext);
             
             var process = new Process
