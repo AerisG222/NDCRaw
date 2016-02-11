@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -17,13 +16,13 @@ namespace NDCRaw
         }
 		
 		
-        public string Convert(string srcPath)
+        public DCRawResult Convert(string srcPath)
         {
             return ConvertAsync(srcPath).Result;
         }
         
         
-        public Task<string> ConvertAsync(string srcPath)
+        public Task<DCRawResult> ConvertAsync(string srcPath)
         {
             if(!File.Exists(srcPath))
 			{
@@ -34,24 +33,29 @@ namespace NDCRaw
         }
         
         
-        // TODO: what if we want to specify a timeout?
         // http://stackoverflow.com/questions/10788982/is-there-any-async-equivalent-of-process-start
-        Task<string> RunProcessAsync(string fileName)
+        Task<DCRawResult> RunProcessAsync(string fileName)
         {
-            var tcs = new TaskCompletionSource<string>();
+            var tcs = new TaskCompletionSource<DCRawResult>();
             var ext = Options.Format == Format.Ppm ? ".ppm" : ".tiff";
             var output = fileName.Replace(Path.GetExtension(fileName), ext);
             
             var process = new Process
             {
                 StartInfo = Options.GetStartInfo(fileName),
-                
                 EnableRaisingEvents = true
             };
 
             process.Exited += (sender, args) =>
             {
-                tcs.SetResult(output);
+                var result = new DCRawResult {
+                    ExitCode = process.ExitCode,
+                    StandardOutput = process.StandardOutput.ReadToEnd(),
+                    StandardError = process.StandardError.ReadToEnd(),
+                    OutputFilename = output
+                };
+                
+                tcs.SetResult(result);
                 process.Dispose();
             };
 

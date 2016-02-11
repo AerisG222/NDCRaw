@@ -17,15 +17,17 @@ namespace NDCRaw.Tests
         
         public NDCRawTests()
         {
+            _files.Add("DSC_0041.NEF");
             _files.Add("DSC_3982.NEF");
+            _files.Add("DSC_9762.NEF");
         }
         
         
         [Fact]
         public void NoCustomizationTest()
         {
-            ExecuteTest(new DCRawOptions(), "noargs_");
-            ExecuteTest(GetPreferredDefaultOptions(), "pref_");
+            ExecuteTest(new DCRawOptions(), "noargs");
+            ExecuteTest(GetPreferredDefaultOptions(), "pref");
         }
         
         
@@ -37,7 +39,7 @@ namespace NDCRaw.Tests
             opts.AdjustBrightness = 1.5f;
             opts.Write16Bits = true;
 
-            ExecuteTest(opts, "curr_");
+            ExecuteTest(opts, "curr");
         }
         
         
@@ -47,10 +49,10 @@ namespace NDCRaw.Tests
             var opts = GetPreferredDefaultOptions();
             
             opts.Colorspace = Colorspace.Adobe;
-            ExecuteTest(opts, "adobe_");
+            ExecuteTest(opts, "adobe");
             
             opts.Colorspace = Colorspace.sRGB;
-            ExecuteTest(opts, "srgb_");
+            ExecuteTest(opts, "srgb");
         }
         
         
@@ -62,7 +64,7 @@ namespace NDCRaw.Tests
             // special key to use the embedded profile if exists
             opts.CameraIccProfileFile = "embed";
             
-            ExecuteTest(opts, "icc_");
+            ExecuteTest(opts, "icc");
         }
         
         
@@ -72,16 +74,16 @@ namespace NDCRaw.Tests
             var opts = GetPreferredDefaultOptions();
             
             opts.Quality = InterpolationQuality.Quality0;
-            ExecuteTest(opts, "q0_");
+            ExecuteTest(opts, "q0");
             
             opts.Quality = InterpolationQuality.Quality1;
-            ExecuteTest(opts, "q1_");
+            ExecuteTest(opts, "q1");
             
             opts.Quality = InterpolationQuality.Quality2;
-            ExecuteTest(opts, "q2_");
+            ExecuteTest(opts, "q2");
             
             opts.Quality = InterpolationQuality.Quality3;
-            ExecuteTest(opts, "q3_");
+            ExecuteTest(opts, "q3");
         }
         
         
@@ -91,13 +93,10 @@ namespace NDCRaw.Tests
             var opts = GetPreferredDefaultOptions();
             
             opts.AppliedMedianFilterNumberPasses = 1;
-            ExecuteTest(opts, "q3c1_");
+            ExecuteTest(opts, "q3c1");
             
             opts.AppliedMedianFilterNumberPasses = 2;
-            ExecuteTest(opts, "q3c2_");
-            
-            opts.AppliedMedianFilterNumberPasses = 10;
-            ExecuteTest(opts, "q3c10_");
+            ExecuteTest(opts, "q3c2");
         }
         
         
@@ -107,10 +106,10 @@ namespace NDCRaw.Tests
             var opts = GetPreferredDefaultOptions();
             
             opts.Write16Bits = true;
-            ExecuteTest(opts, "bit16_");
+            ExecuteTest(opts, "bit16");
             
             opts.Write16Bits = false;
-            ExecuteTest(opts, "bit8_");
+            ExecuteTest(opts, "bit8");
         }
         
         
@@ -122,7 +121,7 @@ namespace NDCRaw.Tests
             opts.UseCameraWhiteBalance = false;
             opts.AverageWholeImageForWhiteBalance = true;
 
-            ExecuteTest(opts, "avgwb_");
+            ExecuteTest(opts, "avgwb");
         }
         
         
@@ -133,7 +132,7 @@ namespace NDCRaw.Tests
             
             opts.DontAutomaticallyBrighten = false;
             
-            ExecuteTest(opts, "brighten_");
+            ExecuteTest(opts, "brighten");
         }
         
         
@@ -144,7 +143,7 @@ namespace NDCRaw.Tests
             
             opts.Format = Format.Tiff;
             
-            ExecuteTest(opts, "tiff_");
+            ExecuteTest(opts, "tiff");
         }
         
         
@@ -154,47 +153,48 @@ namespace NDCRaw.Tests
             var opts = new DCRawOptions();
             
             opts.HighlightMode = HighlightMode.Blend;
-            ExecuteTest(opts, "hblend_");
+            ExecuteTest(opts, "hblend");
             
             opts.HighlightMode = HighlightMode.Clip;
-            ExecuteTest(opts, "hclip_");
+            ExecuteTest(opts, "hclip");
             
             opts.HighlightMode = HighlightMode.Unclip;
-            ExecuteTest(opts, "hunclip_");
+            ExecuteTest(opts, "hunclip");
             
             opts.HighlightMode = HighlightMode.Rebuild3;
-            ExecuteTest(opts, "h3_");
-            
-            opts.HighlightMode = HighlightMode.Rebuild4;
-            ExecuteTest(opts, "h4_");
+            ExecuteTest(opts, "h3");
             
             opts.HighlightMode = HighlightMode.Rebuild5;
-            ExecuteTest(opts, "h5_");
-            
-            opts.HighlightMode = HighlightMode.Rebuild6;
-            ExecuteTest(opts, "h6_");
-            
-            opts.HighlightMode = HighlightMode.Rebuild7;
-            ExecuteTest(opts, "h7_");
+            ExecuteTest(opts, "h5");
             
             opts.HighlightMode = HighlightMode.Rebuild8;
-            ExecuteTest(opts, "h8_");
+            ExecuteTest(opts, "h8");
             
             opts.HighlightMode = HighlightMode.Rebuild9;
-            ExecuteTest(opts, "h9_");
+            ExecuteTest(opts, "h9");
         }
         
         
         [Fact]
-        public void MyOptimalTest()
+        public void MyOptimalDaytimePhotoTest()
         {
             var opts = GetPreferredDefaultOptions();
+            opts.HighlightMode = HighlightMode.Blend;
             opts.Colorspace = Colorspace.sRGB;
             
-            // does imagemagick work better with 8b or 16b?
-            // does imagemagick work better with adobe or srgb?
+            ExecuteTest(opts, "dayopt");
+        }
+        
+        
+        [Fact]
+        public void MyOptimalNighttimePhotoTest()
+        {
+            var opts = GetPreferredDefaultOptions();
+            opts.DontAutomaticallyBrighten = true;
+            opts.HighlightMode = HighlightMode.Blend;
+            opts.Colorspace = Colorspace.sRGB;
             
-            ExecuteTest(opts, "optimal_");
+            ExecuteTest(opts, "nightopt");
         }
         
         
@@ -204,13 +204,12 @@ namespace NDCRaw.Tests
             
             opts.UseCameraWhiteBalance = true;
             opts.Quality = InterpolationQuality.Quality3;
-            opts.DontAutomaticallyBrighten = true;
             
             return opts;
         }
         
         
-        void ExecuteTest(DCRawOptions opts, string renamePrefix)
+        void ExecuteTest(DCRawOptions opts, string renameSuffix)
         {
             foreach(var sourceFile in _files)
             {
@@ -218,23 +217,23 @@ namespace NDCRaw.Tests
                 
                 if(SHOW_COMMAND_LINES)
                 {
-                    Console.WriteLine($"prefix: {renamePrefix} cmdline: {opts.GetStartInfo(sourceFile).Arguments}");
+                    Console.WriteLine($"prefix: {renameSuffix} cmdline: {opts.GetStartInfo(sourceFile).Arguments}");
                 }
                 
-                var outfile = dcraw.Convert(sourceFile);
+                var result = dcraw.Convert(sourceFile);
                 
-                Assert.True(File.Exists(outfile));
+                Assert.True(File.Exists(result.OutputFilename));
                 
                 if(!KEEP_TEST_RESULTS)
                 {
-                    File.Delete(outfile);
+                    File.Delete(result.OutputFilename);
                 }
                 else
                 {
                     var dir = "test_output";
                     Directory.CreateDirectory(dir);
-                    var newFile = Path.Combine(Path.GetDirectoryName(sourceFile), dir, renamePrefix + Path.GetFileName(outfile));
-                    File.Move(outfile, newFile);
+                    var newFile = Path.Combine(Path.GetDirectoryName(sourceFile), dir, $"{Path.GetFileNameWithoutExtension(result.OutputFilename)}_{renameSuffix}{Path.GetExtension(result.OutputFilename)}");
+                    File.Move(result.OutputFilename, newFile);
                 }
             }
         }

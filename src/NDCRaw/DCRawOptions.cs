@@ -1,4 +1,3 @@
-using System;
 using System.Text;
 using System.Diagnostics;
 
@@ -8,7 +7,6 @@ namespace NDCRaw
     public class DCRawOptions
     {
         public string DCRawPath { get; set; }
-        //public int ExecutionTimeout { get; set; }
         public bool UseCameraWhiteBalance { get; set; }
         public bool AverageWholeImageForWhiteBalance { get; set; }
         public GrayBox AverageGrayBoxForWhiteBalance { get; set; }
@@ -49,6 +47,9 @@ namespace NDCRaw
             var psi = new ProcessStartInfo();
             
             psi.FileName = DCRawPath;
+            psi.UseShellExecute = false;
+            psi.RedirectStandardOutput = true;
+            psi.RedirectStandardError = true;
             
             StringBuilder args = new StringBuilder();
             
