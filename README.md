@@ -1,5 +1,6 @@
-[![NuGet](https://img.shields.io/nuget/dt/NDCRaw.svg)]()
-[![NuGet](https://img.shields.io/nuget/v/NDCRaw.svg)]()
+[![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/AerisG222/NDCRaw/blob/master/LICENSE.md)
+[![NuGet](https://img.shields.io/nuget/dt/NDCRaw.svg)](https://www.nuget.org/packages/NDCRaw/)
+[![NuGet](https://img.shields.io/nuget/v/NDCRaw.svg)](https://www.nuget.org/packages/NDCRaw/)
 
 #NDCRaw
 
