@@ -1,3 +1,6 @@
+[![NuGet](https://img.shields.io/nuget/dt/NDCRaw.svg)]()
+[![NuGet](https://img.shields.io/nuget/v/NDCRaw.svg)]()
+
 #NDCRaw
 
 A .Net library to wrap the functionality of DCRaw.
