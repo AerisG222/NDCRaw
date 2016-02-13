@@ -5,17 +5,17 @@ using System.Threading.Tasks;
 
 namespace NDCRaw
 {
-	public class DCRaw
-	{
+    public class DCRaw
+    {
         public DCRawOptions Options { get; private set; }
         
         
-		public DCRaw(DCRawOptions options)
+        public DCRaw(DCRawOptions options)
         {
             Options = options;
         }
-		
-		
+        
+        
         public DCRawResult Convert(string srcPath)
         {
             return ConvertAsync(srcPath).Result;
@@ -25,9 +25,9 @@ namespace NDCRaw
         public Task<DCRawResult> ConvertAsync(string srcPath)
         {
             if(!File.Exists(srcPath))
-			{
-				throw new FileNotFoundException("Please make sure the raw image exists.", srcPath);
-			}
+            {
+                throw new FileNotFoundException("Please make sure the raw image exists.", srcPath);
+            }
             
             return RunProcessAsync(srcPath);
         }
@@ -63,5 +63,5 @@ namespace NDCRaw
 
             return tcs.Task;
         }
-	}
+    }
 }
