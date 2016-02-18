@@ -1,6 +1,7 @@
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/AerisG222/NDCRaw/blob/master/LICENSE.md)
 [![NuGet](https://img.shields.io/nuget/dt/NDCRaw.svg)](https://www.nuget.org/packages/NDCRaw/)
 [![NuGet](https://img.shields.io/nuget/v/NDCRaw.svg)](https://www.nuget.org/packages/NDCRaw/)
+[![Coverity Scan](https://img.shields.io/coverity/scan/7993.svg)](https://scan.coverity.com/projects/aerisg222-ndcraw)
 
 #NDCRaw
 
