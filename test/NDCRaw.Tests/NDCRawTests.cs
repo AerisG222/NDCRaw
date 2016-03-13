@@ -20,6 +20,7 @@ namespace NDCRaw.Tests
             _files.Add("DSC_0041.NEF");
             _files.Add("DSC_3982.NEF");
             _files.Add("DSC_9762.NEF");
+            _files.Add("space test.NEF");
         }
         
         

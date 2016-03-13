@@ -192,11 +192,17 @@ namespace NDCRaw
                 args.Append("-T ");
             }
             
-            args.Append(rawFile);
+            args.Append(EscapeFilename(rawFile));
             
             psi.Arguments = args.ToString();
             
             return psi;
+        }
+        
+        
+        string EscapeFilename(string file)
+        {
+            return $"\"{file}\"";
         }
     }
 }
