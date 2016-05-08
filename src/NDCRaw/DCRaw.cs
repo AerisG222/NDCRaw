@@ -1,3 +1,5 @@
+using System;
+using System.ComponentModel;
 using System.IO;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -59,7 +61,14 @@ namespace NDCRaw
                 process.Dispose();
             };
 
-            process.Start();
+            try
+            {
+                process.Start();
+            }
+            catch (Win32Exception ex)
+            {
+                throw new Exception("Error when trying to start the dcraw process.  Please make sure dcraw is installed, and its path is properly specified in the options.", ex);
+            }
 
             return tcs.Task;
         }
