@@ -8,7 +8,7 @@ namespace NDCRaw.Tests
 {
     public class NDCRawTests
     {
-        const bool KEEP_TEST_RESULTS = true;
+        const bool KEEP_TEST_RESULTS = false;
         const bool SHOW_COMMAND_LINES = true;
         
         
