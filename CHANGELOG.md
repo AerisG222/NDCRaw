@@ -1,3 +1,6 @@
+#0.3.0 (05/09/2016)
+- initial attempt at supporting both .net full framework and .net core
+
 #0.2.1 (03/13/2016)
 - allow spaces in file path
 
