@@ -15,7 +15,7 @@
     },
     "frameworks": {
         "net451": { },
-        "netstandard15": {
+        "netstandard1.5": {
             "imports": [ 
                 "dotnet55", 
                 "portable-dnxcore50+net45+win8+wp8+wpa81" 
