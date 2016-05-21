@@ -1,14 +1,21 @@
 {
     "dependencies": {
-        "dotnet-test-xunit": "1.0.0-rc2-*",
-        "NDCRaw": "0.3.0",
+        "dotnet-test-xunit": "1.0.0-*",
+        "NDCRaw": "0.3.1",
         "xunit": "2.1.0-*"
     },
     "testRunner": "xunit",
     "frameworks": {
+        /*
+        "net451": {
+            "dependencies": {
+                "Microsoft.NETCore.Platforms": "1.0.1-rc2-24027"
+            }
+        },
+        */
         "netcoreapp1.0": {
             "dependencies": {
-                "Microsoft.NETCore.Platforms": "1.0.1-*"
+                "Microsoft.NETCore.App": "1.0.0-rc2-3002702"
             },
             "imports": [
                 "netstandardapp1.5",
