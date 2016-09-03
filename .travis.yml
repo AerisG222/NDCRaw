@@ -59,4 +59,5 @@ install:
   - dotnet restore
 script:
   # Run tests
-  - dotnet test -c $CONFIGURATION -f $FRAMEWORK test/NDCRaw.Tests
+  - cd test/NDCRaw.Tests
+  - dotnet test -c $CONFIGURATION -f $FRAMEWORK
