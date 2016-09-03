@@ -1,6 +1,6 @@
-[![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/AerisG222/NDCRaw/blob/master/LICENSE.md)
-[![NuGet](https://img.shields.io/nuget/dt/NDCRaw.svg)](https://www.nuget.org/packages/NDCRaw/)
-[![NuGet](https://img.shields.io/nuget/v/NDCRaw.svg)](https://www.nuget.org/packages/NDCRaw/)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/AerisG222/NDCRaw/blob/master/LICENSE.md)
+[![NuGet](https://buildstats.info/nuget/NDCRaw)](https://www.nuget.org/packages/NDCRaw/)
+[![Travis](https://img.shields.io/travis/AerisG222/NDCRaw.svg?maxAge=2592000)](https://travis-ci.org/AerisG222/NDCRaw)
 [![Coverity Scan](https://img.shields.io/coverity/scan/7993.svg)](https://scan.coverity.com/projects/aerisg222-ndcraw)
 
 #NDCRaw
