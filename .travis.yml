@@ -16,17 +16,17 @@ matrix:
     - os: linux
       dist: trusty # Ubuntu 14.04
       sudo: required
-      env: CONFIGURATION=Debug FRAMEWORK=netstandard1.5
+      env: CONFIGURATION=Debug FRAMEWORK=netcoreapp1.0
     - os: linux
       dist: trusty
       sudo: required
-      env: CONFIGURATION=Release FRAMEWORK=netstandard1.5
+      env: CONFIGURATION=Release FRAMEWORK=netcoreapp1.0
     - os: osx
       osx_image: xcode7.2 # macOS 10.11
-      env: CONFIGURATION=Debug FRAMEWORK=netstandard1.5
+      env: CONFIGURATION=Debug FRAMEWORK=netcoreapp1.0
     - os: osx
       osx_image: xcode7.2
-      env: CONFIGURATION=Release FRAMEWORK=netstandard1.5
+      env: CONFIGURATION=Release FRAMEWORK=netcoreapp1.0
 
 before_install:
   # Install OpenSSL
@@ -58,4 +58,5 @@ install:
   - dotnet restore
 script:
   # Run tests
-  - dotnet test -c $CONFIGURATION -f $FRAMEWORK src/NDCRaw
+  - dotnet test -c $CONFIGURATION -f $FRAMEWORK test/NDCRaw.Tests
+  
