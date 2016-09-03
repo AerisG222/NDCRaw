@@ -10,6 +10,7 @@ addons:
     - libssl-dev
     - libunwind8
     - zlib1g
+    - dcraw
 
 matrix:
   include:
@@ -59,4 +60,3 @@ install:
 script:
   # Run tests
   - dotnet test -c $CONFIGURATION -f $FRAMEWORK test/NDCRaw.Tests
-  
