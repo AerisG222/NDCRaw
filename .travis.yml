@@ -12,18 +12,18 @@ matrix:
       sudo: required
       dotnet: 1.0.0-preview2-003131
       mono: none
-      env: CONFIGURATION=Debug FRAMEWORK=netcoreapp1.1 DOTNETCORE=1
+      env: CONFIGURATION=Debug DOTNETCORE=1
     - os: linux
       dist: trusty
       sudo: required
       dotnet: 1.0.0-preview2-003131
       mono: none
-      env: CONFIGURATION=Release FRAMEWORK=netcoreapp1.1 DOTNETCORE=1
+      env: CONFIGURATION=Release DOTNETCORE=1
 
 script:
   - dotnet restore
   - cd src/NDCRaw
-  - dotnet build -c $CONFIGURATION -f $FRAMEWORK
+  - dotnet build -c $CONFIGURATION -f netstandard1.6
   - cd ../../test/NDCRaw.Tests
-  - dotnet build -c $CONFIGURATION -f $FRAMEWORK
-  - dotnet test -c $CONFIGURATION -f $FRAMEWORK
+  - dotnet build -c $CONFIGURATION -f netcoreapp1.1
+  - dotnet test -c $CONFIGURATION -f netcoreapp1.1
