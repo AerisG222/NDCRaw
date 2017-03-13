@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>.Net wrapper for DCRaw</Description>
+    <AssemblyTitle>NDCRaw</AssemblyTitle>
+    <VersionPrefix>0.4.0</VersionPrefix>
+    <Authors>Mike Morano &lt;mmorano@mikeandwan.us&gt;</Authors>
+    <TargetFrameworks>netstandard1.6</TargetFrameworks>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DebugType>portable</DebugType>
+    <AssemblyName>NDCRaw</AssemblyName>
+    <PackageId>NDCRaw</PackageId>
+    <PackageTags>raw;DCRaw;photography;imaging</PackageTags>
+    <PackageProjectUrl>https://github.com/AerisG222/NDCRaw</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/AerisG222/NDCRaw/blob/master/LICENSE.md</PackageLicenseUrl>
+    <NetStandardImplicitPackageVersion Condition=" '$(TargetFramework)' == 'netstandard1.6' ">1.6.0</NetStandardImplicitPackageVersion>
+  </PropertyGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.6' ">
+    <PackageReference Include="System.Diagnostics.Process" Version="4.1.0" />
+  </ItemGroup>
+
+</Project>
