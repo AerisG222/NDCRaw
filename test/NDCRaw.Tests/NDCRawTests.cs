@@ -218,7 +218,7 @@ namespace NDCRaw.Tests
                 
                 if(SHOW_COMMAND_LINES)
                 {
-                    Console.WriteLine($"prefix: {renameSuffix} cmdline: {opts.GetStartInfo(sourceFile).Arguments}");
+                    Console.WriteLine($"prefix: {renameSuffix} cmdline: {string.Join(" ", opts.GetArguments(sourceFile))}");
                 }
                 
                 var result = dcraw.Convert(sourceFile);

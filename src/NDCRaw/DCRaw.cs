@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Medallion.Shell;
 
 
 namespace NDCRaw
@@ -35,42 +36,28 @@ namespace NDCRaw
         }
         
         
-        // http://stackoverflow.com/questions/10788982/is-there-any-async-equivalent-of-process-start
-        Task<DCRawResult> RunProcessAsync(string fileName)
+        async Task<DCRawResult> RunProcessAsync(string fileName)
         {
-            var tcs = new TaskCompletionSource<DCRawResult>();
             var ext = Options.Format == Format.Ppm ? ".ppm" : ".tiff";
             var output = fileName.Replace(Path.GetExtension(fileName), ext);
-            
-            var process = new Process
-            {
-                StartInfo = Options.GetStartInfo(fileName),
-                EnableRaisingEvents = true
-            };
-
-            process.Exited += (sender, args) =>
-            {
-                var result = new DCRawResult {
-                    ExitCode = process.ExitCode,
-                    StandardOutput = process.StandardOutput.ReadToEnd(),
-                    StandardError = process.StandardError.ReadToEnd(),
-                    OutputFilename = output
-                };
-                
-                tcs.SetResult(result);
-                process.Dispose();
-            };
 
             try
             {
-                process.Start();
+                var cmd = Command.Run(Options.DCRawPath, Options.GetArguments(fileName));
+
+                await cmd.Task;
+
+                return new DCRawResult {
+                    ExitCode = cmd.Result.ExitCode,
+                    StandardOutput = cmd.StandardOutput.ReadToEnd(),
+                    StandardError = cmd.StandardError.ReadToEnd(),
+                    OutputFilename = output
+                };
             }
             catch (Win32Exception ex)
             {
                 throw new Exception("Error when trying to start the dcraw process.  Please make sure dcraw is installed, and its path is properly specified in the options.", ex);
             }
-
-            return tcs.Task;
         }
     }
 }

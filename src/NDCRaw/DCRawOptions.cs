@@ -1,5 +1,4 @@
-using System.Text;
-using System.Diagnostics;
+using System.Collections.Generic;
 
 
 namespace NDCRaw
@@ -42,167 +41,167 @@ namespace NDCRaw
         }
         
         
-        public ProcessStartInfo GetStartInfo(string rawFile)
+        public string[] GetArguments(string rawFile)
         {
-            var psi = new ProcessStartInfo();
-            
-            psi.FileName = DCRawPath;
-            psi.UseShellExecute = false;
-            psi.RedirectStandardOutput = true;
-            psi.RedirectStandardError = true;
-            
-            StringBuilder args = new StringBuilder();
+            var args = new List<string>();
             
             if(UseCameraWhiteBalance)
             {
-                args.Append("-w ");
+                args.Add("-w");
             }
             
             if(AverageWholeImageForWhiteBalance)
             {
-                args.Append("-a ");
+                args.Add("-a");
             }
             
             if(AverageGrayBoxForWhiteBalance != null)
             {
-                args.AppendFormat("-A {0} {1} {2} {3} ", 
-                    AverageGrayBoxForWhiteBalance.X,
-                    AverageGrayBoxForWhiteBalance.Y,
-                    AverageGrayBoxForWhiteBalance.Width,
-                    AverageGrayBoxForWhiteBalance.Height);
+                args.Add("-A");
+                args.Add($"{AverageGrayBoxForWhiteBalance.X}");
+                args.Add($"{AverageGrayBoxForWhiteBalance.Y}");
+                args.Add($"{AverageGrayBoxForWhiteBalance.Width}");
+                args.Add($"{AverageGrayBoxForWhiteBalance.Height}");
             }
             
             if(WhiteBalance != null)
             {
-                args.AppendFormat("-r {0} {1} {2} {3} ", 
-                    WhiteBalance.R,
-                    WhiteBalance.G1,
-                    WhiteBalance.B,
-                    WhiteBalance.G2);
+                args.Add("-r");
+                args.Add($"{WhiteBalance.R}");
+                args.Add($"{WhiteBalance.G1}");
+                args.Add($"{WhiteBalance.B}");
+                args.Add($"{WhiteBalance.G2}");
             }
             
             if(UseEmbeddedColorMatrix != null)
             {
-                var arg = UseEmbeddedColorMatrix == true ? "+M " : "-M ";
-                args.Append(arg);
+                var arg = UseEmbeddedColorMatrix == true ? "+M" : "-M";
+                args.Add(arg);
             }
             
             if(!string.IsNullOrEmpty(DeadPixelFile))
             {
-                args.AppendFormat("-P \"{0}\" ", DeadPixelFile);
+                args.Add("-P");
+                args.Add($"{DeadPixelFile}");
             }
             
             if(!string.IsNullOrEmpty(DarkFrameFile))
             {
-                args.AppendFormat("-K \"{0}\" ", DarkFrameFile);
+                args.Add("-K");
+                args.Add($"{DarkFrameFile}");
             }
             
             if(DarknessLevel != null)
             {
-                args.AppendFormat("-k {0} ", DarknessLevel);
+                args.Add("-k");
+                args.Add($"{DarknessLevel}");
             }
             
             if(SaturationLevel != null)
             {
-                args.AppendFormat("-S {0} ", SaturationLevel);
+                args.Add("-S");
+                args.Add($"{SaturationLevel}");
             }
             
             if(WaveletDenoisingThreshold != null)
             {
-                args.AppendFormat("-n {0} ", WaveletDenoisingThreshold);
+                args.Add("-n");
+                args.Add($"{WaveletDenoisingThreshold}");
             }
             
             if(HighlightMode != null)
             {
-                args.AppendFormat("-H {0} ", (int)HighlightMode);
+                args.Add("-H");
+                args.Add($"{(int)HighlightMode}");
             }
             
             if(Flip != null)
             {
-                args.AppendFormat("-t {0} ", (int)Flip);
+                args.Add("-t");
+                args.Add($"{(int)Flip}");
             }
             
             if(Colorspace != null)
             {
-                args.AppendFormat("-o {0} ", (int)Colorspace);
+                args.Add("-o");
+                args.Add($"{(int)Colorspace}");
             }
             
             if(!string.IsNullOrEmpty(OutputIccProfileFile))
             {
-                args.AppendFormat("-o \"{0}\" ", OutputIccProfileFile);
+                args.Add("-o");
+                args.Add($"{OutputIccProfileFile}");
             }
             
             if(!string.IsNullOrEmpty(CameraIccProfileFile))
             {
-                args.AppendFormat("-p \"{0}\" ", CameraIccProfileFile);
+                args.Add("-p");
+                args.Add($"{CameraIccProfileFile}");
             }
             
             if(DocumentMode)
             {
-                args.Append("-d ");
+                args.Add("-d");
             }
             
             if(DocumentModeNoScaling)
             {
-                args.Append("-D ");
+                args.Add("-D");
             }
             
             if(DontAutomaticallyBrighten)
             {
-                args.Append("-W ");
+                args.Add("-W");
             }
             
             if(AdjustBrightness != null)
             {
-                args.AppendFormat("-b {0} ", AdjustBrightness);
+                args.Add("-b");
+                args.Add($"{AdjustBrightness}");
             }
             
             if(GammaCurve != null)
             {
-                args.AppendFormat("-g {0} {1} ", GammaCurve.Power, GammaCurve.ToeSlope);
+                args.Add("-g");
+                args.Add($"{GammaCurve.Power}");
+                args.Add($"{GammaCurve.ToeSlope}");
             }
             
             if(Quality != null)
             {
-                args.AppendFormat("-q {0} ", (int)Quality);
+                args.Add("-q");
+                args.Add($"{(int)Quality}");
             }
             
             if(HalfSizeColorImage)
             {
-                args.Append("-h ");
+                args.Add("-h");
             }
             
             if(InterpolateRggbAsFourColors)
             {
-                args.Append("-f ");
+                args.Add("-f");
             }
             
             if(AppliedMedianFilterNumberPasses != null)
             {
-                args.AppendFormat("-m {0} ", AppliedMedianFilterNumberPasses);
+                args.Add("-m");
+                args.Add($"{AppliedMedianFilterNumberPasses}");
             }
             
             if(Write16Bits)
             {
-                args.Append("-6 ");
+                args.Add("-6");
             }
             
             if(Format == Format.Tiff)
             {
-                args.Append("-T ");
+                args.Add("-T");
             }
             
-            args.Append(EscapeFilename(rawFile));
+            args.Add(rawFile);
             
-            psi.Arguments = args.ToString();
-            
-            return psi;
-        }
-        
-        
-        string EscapeFilename(string file)
-        {
-            return $"\"{file}\"";
+            return args.ToArray();
         }
     }
 }
