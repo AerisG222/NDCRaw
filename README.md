@@ -3,6 +3,13 @@
 [![Travis](https://img.shields.io/travis/AerisG222/NDCRaw.svg)](https://travis-ci.org/AerisG222/NDCRaw)
 [![Coverity Scan](https://img.shields.io/coverity/scan/7993.svg)](https://scan.coverity.com/projects/aerisg222-ndcraw)
 
+I am no longer using this in my own projects as I have moved to [NRawTherapee](https://github.com/AerisG222/NRawTherapee) instead.  Given this,
+I am archiving this repo as I currently have no intention to make any further enhancements.
+
+
+---
+
+
 # NDCRaw
 
 A .Net library to wrap the functionality of DCRaw.
